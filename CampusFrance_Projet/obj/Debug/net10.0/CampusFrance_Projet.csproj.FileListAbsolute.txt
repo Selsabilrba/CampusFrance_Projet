@@ -172,3 +172,4 @@ C:\Users\selsa\source\repos\CampusFrance_Projet\CampusFrance_Projet\bin\Debug\ne
 C:\Users\selsa\source\repos\CampusFrance_Projet\CampusFrance_Projet\bin\Debug\net10.0\runtimes\linux-x64\native\selenium-manager
 C:\Users\selsa\source\repos\CampusFrance_Projet\CampusFrance_Projet\bin\Debug\net10.0\runtimes\osx\native\selenium-manager
 C:\Users\selsa\source\repos\CampusFrance_Projet\CampusFrance_Projet\bin\Debug\net10.0\runtimes\win\native\selenium-manager.exe
+C:\Users\selsa\source\repos\CampusFrance_Projet\CampusFrance_Projet\obj\Debug\net10.0\CampusFrance_Projet.sourcelink.json

@@ -41,8 +41,13 @@ namespace CampusFrance_Projet.StepDefinitions
         public void BeforeScenario()
         {
             Console.WriteLine("=== AVANT LE SCENARIO ===");
-
             var options = new ChromeOptions();
+            options.AddArgument("--headless=new");
+            options.AddArgument("--start-maximized");
+            options.AddArgument("--no-sandbox");
+            options.AddArgument("--disable-dev-shm-usage");
+
+            
             options.AddArgument("--start-maximized");
 
             driver = new ChromeDriver(options);
