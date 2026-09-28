@@ -88,7 +88,8 @@ namespace CampusFrance_Projet.StepDefinitions
                 }
 
                 // Laisse le temps de voir l'état final de la page
-                Thread.Sleep(PauseSeconds * 1000);
+                if (Environment.GetEnvironmentVariable("JENKINS_URL") == null)
+                    Thread.Sleep(PauseSeconds * 1000);
 
                 driver?.Quit();
                 driver?.Dispose();
