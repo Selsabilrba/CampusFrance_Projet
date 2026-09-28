@@ -33,24 +33,42 @@ namespace CampusFrance_Projet.StepDefinitions
         private WebDriverWait Waiter =>
             wait ?? throw new Exception("WebDriverWait non disponible.");
 
-        
+
         // AVANT / APRES CHAQUE SCENARIO
-        
+
 
         [BeforeScenario]
         public void BeforeScenario()
         {
             Console.WriteLine("=== AVANT LE SCENARIO ===");
+
             var options = new ChromeOptions();
-            options.AddArgument("--headless=new");
-            options.AddArgument("--start-maximized");
-            options.AddArgument("--no-sandbox");
-            options.AddArgument("--disable-dev-shm-usage");
 
-            
-            options.AddArgument("--start-maximized");
+            // Jenkins définit automatiquement JENKINS_URL
+            bool isCi = Environment.GetEnvironmentVariable("JENKINS_URL") != null;
 
-            driver = new ChromeDriver(options);
+            if (isCi)
+            {
+                options.AddArgument("--headless=new");
+                options.AddArgument("--window-size=1920,1080");
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--disable-dev-shm-usage");
+            }
+            else
+            {
+                options.AddArgument("--start-maximized");
+            }
+
+            string? driverDir = Environment.GetEnvironmentVariable("CHROMEDRIVER_DIR");
+
+            ChromeDriverService service = string.IsNullOrWhiteSpace(driverDir)
+                ? ChromeDriverService.CreateDefaultService()
+                : ChromeDriverService.CreateDefaultService(driverDir);
+
+            service.InitializationTimeout = TimeSpan.FromSeconds(90);
+            service.HideCommandPromptWindow = true;
+
+            driver = new ChromeDriver(service, options);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
             driver.Navigate().GoToUrl("https://www.campusfrance.org/fr/user/register");
